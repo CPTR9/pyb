@@ -1,6 +1,5 @@
 name: PyBuilder Workflow
 
-
 on:
   push:
     branches:
@@ -9,44 +8,36 @@ on:
     branches:
       - main
 
-
 jobs:
   lint:
     runs-on: ubuntu-latest
 
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9
-
+          python-version: 3.12
 
       - name: Install pylint
         run: pip install pylint
 
-
       - name: Run pylint
         run: pylint src/main/python/helloworld.py
 
-
   build_and_test:
     runs-on: ubuntu-latest
-
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: 3.12
            
       - name: Install PyBuilder
         run: | 
@@ -56,13 +47,11 @@ jobs:
       - name: Build and Test
         run: pyb
 
-
       - name: Upload Test Results
         uses: actions/upload-artifact@v2
         with:
           name: test-results
           path: target/reports  
-
 
       - name: List Files  # Optional step
         run: |
